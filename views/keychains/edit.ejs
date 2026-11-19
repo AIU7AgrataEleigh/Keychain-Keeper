@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Koleksi | Keychain Keeper</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>♡ Keychain Keeper</h1>
+            <p>Small things, lovely memories.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="form-container">
+            <h2>Edit Koleksi ✨</h2>
+            <p>Perbarui informasi gantungan kunci milikmu.</p>
+
+            <form action="/edit/<%= keychain.id %>" method="POST">
+                <label>Nama Gantungan Kunci</label>
+                <input type="text" name="nama" value="<%= keychain.nama %>" required>
+
+                <label>Karakter</label>
+                <input type="text" name="karakter" value="<%= keychain.karakter %>" required>
+
+                <label>Bahan</label>
+                <input type="text" name="bahan" value="<%= keychain.bahan %>" required>
+
+                <label>Warna</label>
+                <input type="text" name="warna" value="<%= keychain.warna %>" required>
+
+                <label>Tanggal Diperoleh</label>
+                <input type="date" name="tanggal_diperoleh" value="<%= tanggalDiperoleh %>" required>
+
+                <label>Kondisi</label>
+                <select name="kondisi" required>
+                    <option value="Baik" <%= keychain.kondisi === 'Baik' ? 'selected' : '' %>>Baik</option>
+                    <option value="Rusak Ringan" <%= keychain.kondisi === 'Rusak Ringan' ? 'selected' : '' %>>Rusak Ringan</option>
+                    <option value="Rusak Berat" <%= keychain.kondisi === 'Rusak Berat' ? 'selected' : '' %>>Rusak Berat</option>
+                </select>
+
+                <div class="form-actions">
+                    <a href="/" class="btn-cancel">Batal</a>
+                    <button type="submit" class="btn-primary">Simpan Perubahan</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>Made with ♡ for every little collection.</p>
+    </footer>
+</body>
+</html>

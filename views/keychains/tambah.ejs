@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Koleksi | Keychain Keeper</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>♡ Keychain Keeper</h1>
+            <p>Small things, lovely memories.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="form-container">
+            <h2>Tambah Koleksi Baru ✨</h2>
+            <p>Catat gantungan kunci baru ke dalam koleksimu.</p>
+
+            <form action="/tambah" method="POST">
+                <label>Nama Gantungan Kunci</label>
+                <input type="text" name="nama" required>
+
+                <label>Karakter</label>
+                <input type="text" name="karakter" required>
+
+                <label>Bahan</label>
+                <input type="text" name="bahan" required>
+
+                <label>Warna</label>
+                <input type="text" name="warna" required>
+
+                <label>Tanggal Diperoleh</label>
+                <input type="date" name="tanggal_diperoleh" required>
+
+                <label>Kondisi</label>
+                <select name="kondisi" required>
+                    <option value="">Pilih kondisi</option>
+                    <option value="Baik">Baik</option>
+                    <option value="Rusak Ringan">Rusak Ringan</option>
+                    <option value="Rusak Berat">Rusak Berat</option>
+                </select>
+
+                <div class="form-actions">
+                    <a href="/" class="btn-cancel">Batal</a>
+                    <button type="submit" class="btn-primary">Simpan Koleksi</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>Made with ♡ for every little collection.</p>
+    </footer>
+</body>
+</html>

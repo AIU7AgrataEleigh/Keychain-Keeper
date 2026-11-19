@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keychain Keeper</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <h1>♡ Keychain Keeper</h1>
+            <p>Small things, lovely memories.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="welcome">
+            <div>
+                <h2>My Little Collection ✨</h2>
+                <p>Kelola dan simpan cerita dari setiap gantungan kuncimu.</p>
+            </div>
+
+            <a href="/tambah" class="btn-primary">+ Tambah Koleksi</a>
+        </section>
+
+        <section class="collection">
+            <% if (keychains.length === 0) { %>
+                <div class="empty-state">
+                    <h3>Belum ada koleksi ♡</h3>
+                    <p>Yuk, tambahkan gantungan kunci pertamamu!</p>
+                </div>
+            <% } else { %>
+
+                <div class="collection-grid">
+                    <% keychains.forEach(item => { %>
+                        <article class="keychain-card">
+                            <div class="card-decoration">♡</div>
+
+                            <div class="card-content">
+                                <span class="category"><%= item.bahan %></span>
+                                <h3><%= item.nama %></h3>
+                                <p>Karakter: <%= item.karakter %></p>
+                                <p>Warna: <%= item.warna %></p>
+                                <p>Diperoleh: <%= new Date(item.tanggal_diperoleh).toLocaleDateString('id-ID') %></p>
+
+                                <span class="condition"><%= item.kondisi %></span>
+
+                                <div class="card-actions">
+                                    <a href="/edit/<%= item.id %>" class="btn-edit">Edit</a>
+
+                                    <button
+                                        type="button"
+                                        class="btn-delete delete-trigger"
+                                        data-url="/hapus/<%= item.id %>"
+                                        data-name="<%= item.nama %>">
+                                        Hapus
+                                    </button>
+                                </div>
+                            </div>
+                        </article>
+                    <% }) %>
+                </div>
+
+            <% } %>
+        </section>
+    </main>
+
+    <!-- Popup Konfirmasi Hapus -->
+    <div class="delete-modal" id="deleteModal">
+        <div class="delete-modal-content">
+            <div class="delete-icon">♡</div>
+
+            <h2>Hapus Koleksi?</h2>
+
+            <p>
+                Apakah kamu yakin ingin menghapus
+                <strong id="deleteItemName"></strong>?
+            </p>
+
+            <p class="delete-warning">
+                Koleksi yang dihapus tidak dapat dikembalikan.
+            </p>
+
+            <div class="delete-modal-actions">
+                <button type="button" class="btn-cancel" id="cancelDelete">
+                    Batal
+                </button>
+
+                <form id="deleteForm" method="POST">
+                    <button type="submit" class="btn-confirm-delete">
+                        Ya, Hapus
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const deleteModal = document.getElementById('deleteModal');
+        const deleteForm = document.getElementById('deleteForm');
+        const deleteItemName = document.getElementById('deleteItemName');
+        const cancelDelete = document.getElementById('cancelDelete');
+
+        document.querySelectorAll('.delete-trigger').forEach(button => {
+            button.addEventListener('click', () => {
+                deleteForm.action = button.dataset.url;
+                deleteItemName.textContent = button.dataset.name;
+
+                deleteModal.classList.add('is-open');
+            });
+        });
+
+        cancelDelete.addEventListener('click', () => {
+            deleteModal.classList.remove('is-open');
+        });
+
+        deleteModal.addEventListener('click', event => {
+            if (event.target === deleteModal) {
+                deleteModal.classList.remove('is-open');
+            }
+        });
+    </script>
+
+
+    <footer>
+        <p>Made with ♡ for every little collection.</p>
+    </footer>
+
+</body>
+</html>
